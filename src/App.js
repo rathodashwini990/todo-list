@@ -15,7 +15,13 @@ function App() {
 
   // Delete Todo
   const deleteTodo = (id) => {
+    // Remove the task
     setTodos(todos.filter((todo) => todo.id !== id));
+
+    // If the task being deleted is the one being edited, clear the edit state
+    if (editTodo && editTodo.id === id) {
+      setEditTodo(null); // Reset the edit state
+    }
   };
 
   // Edit Todo
@@ -23,7 +29,7 @@ function App() {
     setTodos(
       todos.map((todo) => (todo.id === id ? { ...todo, task: updatedTask } : todo))
     );
-    setEditTodo(null); // Reset the edit state
+    setEditTodo(null); // Reset the edit state after updating
   };
 
   return (
